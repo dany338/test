@@ -1,9 +1,15 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import App from './containers/App';
+import Todo from './components/Todo';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+configure({ adapter: new Adapter() });
+
+describe('Test for App component', () => {
+  test('Should renders app', () => {
+    const page = mount(<App />);
+    expect(page.find(Todo)).toHaveLength(1);
+  });
+
+})
